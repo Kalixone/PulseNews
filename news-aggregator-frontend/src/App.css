@@ -1,0 +1,100 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34; /* Kolor tła nagłówka */
+  min-height: 20vh; /* Minimalna wysokość nagłówka (zmniejszone) */
+  display: flex; /* Użycie flexboxa */
+  flex-direction: column; /* Ułożenie elementów w kolumnie */
+  align-items: center; /* Wyśrodkowanie elementów w poziomie */
+  justify-content: center; /* Wyśrodkowanie elementów w pionie */
+  font-size: calc(10px + 2vmin); /* Rozmiar czcionki */
+  color: white; /* Kolor tekstu */
+  padding: 20px; /* Padding dla nagłówka */
+  position: relative; /* Umożliwienie pozycjonowania elementów absolutnych */
+}
+
+.App-link {
+  color: #61dafb; /* Kolor linków */
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg); /* Początkowa pozycja */
+  }
+  to {
+    transform: rotate(360deg); /* Końcowa pozycja */
+  }
+}
+
+/* Nowy styl dla animowanego napisu */
+.header-subtitle {
+  color: #ffffff; /* Kolor białego napisu */
+  margin: 5px 0; /* Zmniejszone marginesy do nagłówka */
+  font-size: 24px; /* Rozmiar czcionki */
+  white-space: nowrap; /* Zapobiega łamaniu tekstu */
+  overflow: hidden; /* Ukrywa tekst wykraczający poza kontener */
+  animation: slide 10s linear infinite; /* Animacja przesuwania */
+  display: inline-block; /* Umożliwienie marginesu i paddingu */
+}
+
+@keyframes slide {
+  0% {
+    transform: translateX(-100%); /* Początkowa pozycja na lewo */
+  }
+  50% {
+    transform: translateX(0); /* Środkowa pozycja */
+  }
+  100% {
+    transform: translateX(100%); /* Końcowa pozycja na prawo */
+  }
+}
+
+/* Styl dla aktualnej godziny */
+.current-time {
+  font-size: 18px; /* Rozmiar czcionki dla godziny */
+  font-weight: bold; /* Pogrubienie czcionki */
+  position: absolute; /* Umożliwienie precyzyjnego pozycjonowania */
+  right: 20px; /* Odstęp od prawej krawędzi */
+  top: 20px; /* Odstęp od górnej krawędzi */
+  color: white; /* Kolor tekstu */
+  z-index: 10; /* Umożliwienie wyświetlania nad innymi elementami */
+}
+
+/* Styl dla stopki */
+.App-footer {
+  background-color: #282c34; /* Kolor tła stopki */
+  color: white; /* Kolor tekstu w stopce */
+  padding: 10px; /* Padding dla stopki */
+  position: relative; /* Pozycjonowanie stopki */
+  bottom: 0; /* Umożliwienie przylegania do dołu */
+  width: 100%; /* Szerokość 100% */
+  text-align: center; /* Wyśrodkowanie tekstu */
+}
+
+/* Styl przycisku licznika artykułów */
+.article-count-button {
+  color: #ffffff; /* Kolor tekstu */
+  margin-right: 20px; /* Odstęp od prawej */
+  background-color: transparent; /* Tło przycisku */
+  border: 2px solid #ffffff; /* Kolor obramowania */
+  border-radius: 5px; /* Zaokrąglenie rogów */
+  padding: 10px; /* Padding wewnętrzny */
+  cursor: pointer; /* Zmieniony kursor po najechaniu */
+}
+
+.article-count-button:hover {
+  background-color: rgba(255, 255, 255, 0.1); /* Kolor tła przy najechaniu */
+}

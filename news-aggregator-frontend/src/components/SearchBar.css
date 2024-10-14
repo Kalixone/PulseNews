@@ -1,0 +1,35 @@
+.search-bar {
+  display: flex;
+  flex-direction: column; /* Ustawienie elementów w kolumnie */
+  align-items: center; /* Wyśrodkowanie elementów */
+  margin: 20px 0; /* Odstęp od innych elementów */
+}
+
+.search-label {
+  margin-bottom: 10px; /* Odstęp między etykietą a polem tekstowym */
+  font-weight: bold; /* Pogrubienie tekstu etykiety */
+}
+
+.search-input {
+  padding: 10px;
+  border-radius: 4px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px; /* Odstęp między polem a przyciskiem */
+  width: 100%; /* Szerokość 100% */
+  max-width: 300px; /* Maksymalna szerokość */
+}
+
+.search-button {
+  background-color: #007bff; /* Kolor przycisku */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  width: 100%; /* Szerokość 100% */
+  max-width: 300px; /* Maksymalna szerokość */
+}
+
+.search-button:hover {
+  background-color: #0056b3; /* Ciemniejszy kolor przy najechaniu */
+}

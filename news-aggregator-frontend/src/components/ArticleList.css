@@ -1,0 +1,166 @@
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #f7f9fc; /* Tło strony */
+  color: #333;
+  margin: 0;
+  padding: 20px;
+}
+
+.header-container {
+  background-color: #3f51b5; /* Tło nagłówka na niebieskie */
+  padding: 20px;
+  text-align: center;
+  margin-bottom: 20px; /* Odstęp od artykułów */
+  border-radius: 8px; /* Zaokrąglone rogi */
+}
+
+h1 {
+  color: #ffffff; /* Kolor białego tekstu tytułu */
+  margin: 0; /* Zresetowanie marginesu */
+}
+
+.header-subtitle {
+  color: #ffffff; /* Kolor nagłówka na biały */
+  margin: 10px 0 0; /* Marginesy do nagłówka */
+}
+
+h2 {
+  color: #6F42C1; /* Delikatny fioletowy kolor dla tytułów artykułów */
+  margin: 0 0 10px; /* Marginesy do tytułów artykułów */
+}
+
+.article-list {
+  display: grid; /* Użyj grid layout do układania artykułów */
+  grid-template-columns: repeat(2, 1fr); /* Dwie kolumny */
+  gap: 20px; /* Odstępy między artykułami */
+  list-style-type: none; /* Usunięcie punktów listy */
+  padding: 0; /* Zresetowanie paddingu */
+}
+
+.article-item {
+  background-color: #e0f7fa; /* Zmienione tło kafelka na jasny błękitny */
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  padding: 15px;
+  text-align: center; /* Wyśrodkowanie treści w kafelku */
+  transition: transform 0.2s;
+}
+
+.article-item:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Powiększony cień przy najechaniu */
+}
+
+.publish-date {
+  color: #777; /* Zmieniony kolor dla daty publikacji */
+  font-style: italic;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 50%; /* Okrągły kształt */
+  object-fit: cover; /* Upewniamy się, że zdjęcie dobrze pasuje do okręgu */
+  width: 300px; /* Zwiększono szerokość miniatury */
+  height: 300px; /* Zwiększono wysokość miniatury */
+  margin-bottom: 15px; /* Zwiększony margines dolny, aby było miejsce pod zdjęciem */
+}
+
+.read-more-link {
+  display: inline-block; /* Umożliwienie marginesu i paddingu */
+  margin-top: 10px; /* Dodanie marginesu od góry */
+  background-color: rgba(255, 255, 255, 0.7); /* Białe tło z przezroczystością */
+  color: #007bff; /* Kolor linku */
+  padding: 10px; /* Padding dla linku */
+  border-radius: 4px; /* Zaokrąglenie rogów */
+  text-decoration: none; /* Bez podkreślenia */
+  transition: background-color 0.2s; /* Efekt przejścia dla zmiany tła */
+}
+
+.read-more-link:hover {
+  text-decoration: underline; /* Podkreślenie przy najechaniu */
+  background-color: rgba(255, 255, 255, 0.9); /* Zmiana tła przy najechaniu */
+}
+
+button {
+  background-color: #007bff; /* Kolor przycisku */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  cursor: pointer;
+  margin-top: 20px; /* Margines od góry */
+}
+
+button:hover {
+  background-color: #0056b3; /* Ciemniejszy kolor przy najechaniu */
+}
+
+/* Nowy styl dla przycisku do pobierania artykułów niezwiązanych z USA */
+.fetch-non-us-articles-button {
+  display: block; /* Wyśrodkowanie przycisku w kontenerze */
+  margin: 20px auto; /* Margines automatyczny od góry i dołu */
+  background-color: #28a745; /* Zielony kolor dla przycisku */
+  color: white;
+  border: none;
+  border-radius: 4px;
+  padding: 10px 15px;
+  text-align: center; /* Wyśrodkowanie tekstu */
+  font-size: 16px; /* Rozmiar czcionki */
+}
+
+.fetch-non-us-articles-button:hover {
+  background-color: #218838; /* Ciemniejszy kolor przy najechaniu */
+}
+
+/* Nowe style dla kontenera wyszukiwania i przycisków */
+.button-search-container {
+  display: flex;
+  justify-content: space-between; /* Ustawia przestrzeń między przyciskami a polami wyszukiwania */
+  align-items: center; /* Wyrównanie elementów w pionie */
+  margin-bottom: 20px; /* Odstęp dolny dla kontenera */
+}
+
+.search-container, .date-search-container {
+  display: flex;
+  align-items: center; /* Wyrównanie elementów w pionie */
+  margin-left: 10px; /* Odstęp między przyciskami a polem wyszukiwania */
+}
+
+input[type="text"], input[type="date"] {
+  padding: 5px;
+  margin-right: 10px; /* Odstęp między polem a przyciskiem */
+}
+
+/* Styl dla kontenera z przyciskami do losowania artykułów i wyszukiwania */
+.random-article-container {
+  display: flex;
+  align-items: center; /* Wyrównanie elementów w pionie */
+}
+
+.random-article-button {
+  margin-right: 15px; /* Odstęp między przyciskami */
+}
+
+/* Dostosowanie dla małych ekranów */
+@media (max-width: 600px) {
+  .article-list {
+    grid-template-columns: 1fr; /* Na małych ekranach jedna kolumna */
+  }
+
+  .button-search-container {
+    flex-direction: column; /* Na małych ekranach ułożenie w kolumnę */
+    align-items: flex-start; /* Wyśrodkowanie w lewym rogu */
+  }
+
+  .search-container, .date-search-container {
+    margin-left: 0; /* Resetowanie marginesu po lewej */
+    margin-top: 10px; /* Dodanie odstępu między polami wyszukiwania */
+  }
+
+  .random-article-container {
+    flex-direction: column; /* Na małych ekranach ułożenie w kolumnę */
+    align-items: flex-start; /* Wyśrodkowanie w lewym rogu */
+  }
+}
