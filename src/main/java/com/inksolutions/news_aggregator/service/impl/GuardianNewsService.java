@@ -26,34 +26,47 @@ public class GuardianNewsService implements AggregationService {
 
     public void fetchArticles() {
         String url = "https://content.guardianapis.com/search?api-key=" + apiKey + "&page-size=100&show-fields=thumbnail";
-
         GuardianResponse response = restTemplate.getForObject(url, GuardianResponse.class);
 
-        if (response != null && response.getResponse() != null && response.getResponse().getResults() != null) {
+        if (response != null && response.getResponse() != null &&
+                response.getResponse().getResults() != null) {
             List<GuardianArticle> guardianArticles = response.getResponse().getResults();
             List<Article> articles = guardianArticles.stream().map(result -> {
+
                 Article article = new Article();
-                article.setTitle(result.getWebTitle());
-                article.setImage(result.getFields() != null ? result.getFields().getThumbnail() : null);
+
+                if (result.getWebTitle() != null) {
+                    article.setTitle(result.getWebTitle());
+                } else {
+                    throw new IllegalArgumentException("Guardian article title is missing");
+                }
+
+                article.setImage(result.getFields() != null ?
+                        result.getFields().getThumbnail() : null);
                 article.setLink(result.getWebUrl());
                 String location = openAIService.determineLocation(result.getWebTitle());
                 article.setLocation(location);
 
                 if (result.getWebPublicationDate() != null) {
                     article.setPublishDate(OffsetDateTime.parse(result.getWebPublicationDate()));
+                } else {
+                    throw new IllegalArgumentException("Guardian article publication" +
+                            " date is missing");
                 }
 
                 return article;
             }).collect(Collectors.toList());
 
             for (Article article : articles) {
-                Optional<Article> existingArticle = articleRepository.findByTitle(article.getTitle());
+                Optional<Article> existingArticle = articleRepository
+                        .findByTitle(article.getTitle());
                 if (!existingArticle.isPresent()) {
                     articleRepository.save(article);
                 }
             }
         }
     }
+
     @Override
     @Scheduled(cron = "0 0 * * * ?")
     public void scheduledFetchArticles() {

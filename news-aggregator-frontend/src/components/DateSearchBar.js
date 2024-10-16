@@ -26,7 +26,7 @@ const DateSearchBar = ({ setArticles }) => {
   return (
     <div className="date-search-bar">
       <label htmlFor="date-input" className="search-label">
-        Search articles by publish date (YYYY-MM-DD):
+        Search articles by publish date:
       </label>
       <input
         type="date"

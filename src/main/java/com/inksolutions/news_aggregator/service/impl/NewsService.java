@@ -1,6 +1,7 @@
 package com.inksolutions.news_aggregator.service.impl;
 
 import com.inksolutions.news_aggregator.model.Article;
+import com.inksolutions.news_aggregator.model.NewsArticle;
 import com.inksolutions.news_aggregator.model.NewsResponse;
 import com.inksolutions.news_aggregator.repository.ArticleRepository;
 import com.inksolutions.news_aggregator.service.AggregationService;
@@ -28,19 +29,27 @@ public class NewsService implements AggregationService {
         NewsResponse response = restTemplate.getForObject(url, NewsResponse.class);
 
         if (response != null && response.getArticles() != null) {
-            List<Article> articles = response.getArticles().stream().map(result -> {
+            List<NewsArticle> guardianArticles = response.getArticles();
+            List<Article> articles = guardianArticles.stream().map(result -> {
+
                 Article article = new Article();
-                article.setTitle(result.getTitle());
-                article.setLink(result.getUrl());
-                if (result.getPublishedAt() != null) {
-                    article.setPublishDate(OffsetDateTime.parse(result.getPublishedAt()));
+
+                if (result.getTitle() != null) {
+                    article.setTitle(result.getTitle());
                 } else {
-                    article.setPublishDate(null);
+                    throw new IllegalArgumentException("News article title is missing");
                 }
 
                 article.setImage(result.getUrlToImage());
+                article.setLink(result.getUrl());
                 String location = openAIService.determineLocation(result.getTitle());
                 article.setLocation(location);
+
+                if (result.getPublishedAt() != null) {
+                    article.setPublishDate(OffsetDateTime.parse(result.getPublishedAt()));
+                } else {
+                    throw new IllegalArgumentException("News article publication date is missing");
+                }
 
                 return article;
             }).collect(Collectors.toList());

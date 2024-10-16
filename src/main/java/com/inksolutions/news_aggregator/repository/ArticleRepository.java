@@ -13,10 +13,14 @@ import java.util.Optional;
 @Repository
 public interface ArticleRepository extends JpaRepository<Article, Long> {
     Optional<Article> findByTitle(String title);
+
     Page<Article> findByLocation(Pageable pageable, String location);
+
     @Query("SELECT a FROM Article a WHERE a.location IS NULL")
     Page<Article> notConnectedToUS(Pageable pageable);
+
     List<Article> findByTitleContainingIgnoreCase(String word);
+
     List<Article> findByPublishDateBetween(OffsetDateTime startOfDay, OffsetDateTime endOfDay);
 }
 

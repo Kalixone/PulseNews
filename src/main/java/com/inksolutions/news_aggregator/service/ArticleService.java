@@ -11,11 +11,18 @@ import java.util.Optional;
 @Service
 public interface ArticleService {
     Page<Article> getFromLocation(Pageable pageable, String location);
+
     List<Article> findAll();
+
     Page<Article> notConnectedToUS(Pageable pageable);
+
     long count();
+
     Optional<Article> getRandom();
+
     Optional<Article> findById(Long id);
+
     List<Article> searcher(String word);
+
     List<Article> findByPublishDate(OffsetDateTime startOfDay);
 }

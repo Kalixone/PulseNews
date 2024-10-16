@@ -24,6 +24,10 @@ public class HuggingFaceService {
     private String apiKey;
 
     public String determineLocation(String articleTitle) {
+        if (articleTitle == null || articleTitle.trim().isEmpty()) {
+            throw new IllegalArgumentException("Article title cannot be null or empty");
+        }
+
         String url = "https://api-inference.huggingface.co/models/dslim/bert-base-NER";
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.APPLICATION_JSON);

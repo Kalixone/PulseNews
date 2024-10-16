@@ -27,9 +27,14 @@ public class DataLoaderImpl implements DataLoaderService, CommandLineRunner {
             return;
         }
 
-        try (CSVReader csvReader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream("/cities.csv")))) {
+        try (CSVReader csvReader = new CSVReader(new InputStreamReader(getClass()
+                .getResourceAsStream("/cities.csv")))) {
             String[] record;
             while ((record = csvReader.readNext()) != null) {
+                if (record[3] == null || record[3].isEmpty()) {
+                    throw new IllegalArgumentException("City name is missing");
+                }
+
                 City city = new City();
                 city.setName(record[3]);
                 cityRepository.save(city);
