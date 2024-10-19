@@ -1,14 +1,12 @@
-// components/SearchBar.js
 import React, { useState } from 'react';
-import './SearchBar.css'; // Upewnij się, że masz odpowiedni styl
+import './SearchBar.css';
 
 const SearchBar = ({ onLocationChange }) => {
   const [location, setLocation] = useState('');
 
   const handleSearch = () => {
     if (location) {
-      onLocationChange(location); // Przekazuje nową lokalizację do ArticleList
-      setLocation(''); // Czyści pole po wyszukaniu
+      onLocationChange(location);
     }
   };
 

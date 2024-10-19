@@ -6,8 +6,7 @@ const DateSearchBar = ({ setArticles }) => {
 
   const handleSearch = async () => {
     if (!date) {
-      console.log('Proszę podać datę'); // Możesz dodać alert dla lepszej widoczności
-      return; // Upewnij się, że data nie jest pusta
+      return;
     }
 
     try {
@@ -16,8 +15,7 @@ const DateSearchBar = ({ setArticles }) => {
         throw new Error('Network response was not ok');
       }
       const articles = await response.json();
-      setArticles(articles); // Upewnij się, że przekazujesz stan wyżej
-      console.log(`Szukam artykułów z datą: ${date}`);
+      setArticles(articles);
     } catch (error) {
       console.error('Error fetching articles by date:', error);
     }

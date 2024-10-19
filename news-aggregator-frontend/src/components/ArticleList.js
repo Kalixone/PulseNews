@@ -3,7 +3,6 @@ import {
   getAllArticles,
   getArticlesByLocation,
   getArticlesNotConnectedToUS,
-  getRandomArticle,
   findArticlesByDate,
 } from '../services/articleService';
 import SearchBar from './SearchBar';
@@ -17,14 +16,14 @@ const ArticleList = ({ setDisplayedArticles }) => {
   const [page, setPage] = useState(0);
   const [size] = useState(10);
   const [totalPages, setTotalPages] = useState(0);
-  const [fetchingNonUSArticles, setFetchingNonUSArticles] = useState(false);
-  const [location, setLocation] = useState('');
-  const [date, setDate] = useState('');
   const [error, setError] = useState(null);
-  const [randomArticle, setRandomArticle] = useState(null);
-  const [showingRandomArticle, setShowingRandomArticle] = useState(false);
+  const [filterState, setFilterState] = useState({
+    fetchingNonUSArticles: false,
+    location: '',
+    date: '',
+    keyword: '',
+  });
 
-  // Fetch articles based on current filter settings
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -32,12 +31,12 @@ const ArticleList = ({ setDisplayedArticles }) => {
       try {
         let response;
 
-        if (fetchingNonUSArticles) {
+        if (filterState.fetchingNonUSArticles) {
           response = await getArticlesNotConnectedToUS(page, size);
-        } else if (location) {
-          response = await getArticlesByLocation(location, page, size);
-        } else if (date) {
-          response = await findArticlesByDate(date, page, size);
+        } else if (filterState.location) {
+          response = await getArticlesByLocation(filterState.location, page, size);
+        } else if (filterState.date) {
+          response = await findArticlesByDate(filterState.date, page, size);
         } else {
           response = await getAllArticles(page, size);
         }
@@ -54,68 +53,49 @@ const ArticleList = ({ setDisplayedArticles }) => {
     };
 
     fetchData();
-  }, [page, size, fetchingNonUSArticles, location, date, setDisplayedArticles]);
+  }, [page, size, filterState, setDisplayedArticles]);
 
   const fetchNotConnectedToUSArticles = () => {
-    setFetchingNonUSArticles(true);
+    setFilterState({
+      fetchingNonUSArticles: true,
+      location: '',
+      date: '',
+      keyword: '',
+    });
     setPage(0);
-    setShowingRandomArticle(false);
-    setLocation(''); // Clear location
-    setDate(''); // Clear date
-  };
-
-  const handleNextPage = () => {
-    if (page < totalPages - 1) {
-      setPage(page + 1);
-      window.scrollTo(0, 0);
-    }
-  };
-
-  const handlePreviousPage = () => {
-    if (page > 0) {
-      setPage(page - 1);
-      window.scrollTo(0, 0);
-    }
-  };
-
-  const handleRandomArticle = async () => {
-    try {
-      const response = await getRandomArticle();
-      setRandomArticle(response.data);
-      setShowingRandomArticle(true);
-      setArticles([]); // Clear previous articles when showing random article
-      setLocation(''); // Clear location
-      setDate(''); // Clear date
-      setFetchingNonUSArticles(false); // Reset non-US fetching flag
-      setPage(0); // Reset page
-    } catch (error) {
-      console.error('Error fetching random article:', error);
-      setError('Error fetching random article. Please try again later.');
-    }
   };
 
   const handleLocationChange = (newLocation) => {
-    setLocation(newLocation);
+    setFilterState((prev) => ({
+      ...prev,
+      location: newLocation,
+      fetchingNonUSArticles: false,
+      date: '',
+      keyword: '',
+    }));
     setPage(0);
-    setShowingRandomArticle(false);
-    setDate(''); // Clear date
-    setFetchingNonUSArticles(false); // Reset non-US fetching flag
   };
 
   const handleDateChange = (newDate) => {
-    setDate(newDate);
+    setFilterState((prev) => ({
+      ...prev,
+      date: newDate,
+      fetchingNonUSArticles: false,
+      location: '',
+      keyword: '',
+    }));
     setPage(0);
-    setShowingRandomArticle(false);
-    setLocation(''); // Clear location
-    setFetchingNonUSArticles(false); // Reset non-US fetching flag
   };
 
   const handleKeywordChange = (keyword) => {
-    // Reset states related to fetching articles
-    setLocation(''); // Clear location
-    setDate(''); // Clear date
-    setFetchingNonUSArticles(false); // Reset non-US fetching flag
-    setPage(0); // Reset to first page
+    setFilterState((prev) => ({
+      ...prev,
+      keyword: keyword,
+      fetchingNonUSArticles: false,
+      location: '',
+      date: '',
+    }));
+    setPage(0);
   };
 
   if (loading) {
@@ -130,53 +110,34 @@ const ArticleList = ({ setDisplayedArticles }) => {
       <button onClick={fetchNotConnectedToUSArticles} className="fetch-non-us-articles-button">
         Show Articles Not Connected to US
       </button>
-      <button onClick={handleRandomArticle} className="fetch-random-article-button">
-        Show Random Article
-      </button>
       {error && <p className="error-message">{error}</p>}
 
-      {showingRandomArticle && randomArticle && (
-        <div className="random-article">
-          <h2>{randomArticle.title}</h2>
-          <p className="publish-date">{new Date(randomArticle.publishDate).toLocaleDateString()}</p>
-          {randomArticle.location && <p>Location: {randomArticle.location}</p>}
-          {randomArticle.image && <img src={randomArticle.image} alt={randomArticle.title} />}
-          <a href={randomArticle.link} className="read-more-link" target="_blank" rel="noopener noreferrer">
-            Read more about this article!
-          </a>
-        </div>
-      )}
+      <ul className="article-list">
+        {Array.isArray(articles) && articles.length > 0 ? (
+          articles.map((article) => (
+            <li key={article.id} className="article-item">
+              <h2>{article.title}</h2>
+              <p className="publish-date">{new Date(article.publishDate).toLocaleDateString()}</p>
+              {article.location && <p>Location: {article.location}</p>}
+              {article.image && <img src={article.image} alt={article.title} />}
+              <a href={article.link} className="read-more-link" target="_blank" rel="noopener noreferrer">
+                Read more about this article!
+              </a>
+            </li>
+          ))
+        ) : (
+          <p>No articles found.</p>
+        )}
+      </ul>
 
-      {!showingRandomArticle && (
-        <ul className="article-list">
-          {Array.isArray(articles) && articles.length > 0 ? (
-            articles.map((article) => (
-              <li key={article.id} className="article-item">
-                <h2>{article.title}</h2>
-                <p className="publish-date">{new Date(article.publishDate).toLocaleDateString()}</p>
-                {article.location && <p>Location: {article.location}</p>}
-                {article.image && <img src={article.image} alt={article.title} />}
-                <a href={article.link} className="read-more-link" target="_blank" rel="noopener noreferrer">
-                  Read more about this article!
-                </a>
-              </li>
-            ))
-          ) : (
-            <p>No articles found.</p>
-          )}
-        </ul>
-      )}
-
-      {!showingRandomArticle && (
-        <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
-          <button onClick={handlePreviousPage} disabled={page === 0} style={{ marginRight: '10px' }}>
-            Previous
-          </button>
-          <button onClick={handleNextPage} disabled={page >= totalPages - 1}>
-            Next
-          </button>
-        </div>
-      )}
+      <div style={{ display: 'flex', justifyContent: 'center', margin: '20px 0' }}>
+        <button onClick={() => setPage((prev) => Math.max(prev - 1, 0))} disabled={page === 0} style={{ marginRight: '10px' }}>
+          Previous
+        </button>
+        <button onClick={() => setPage((prev) => Math.min(prev + 1, totalPages - 1))} disabled={page >= totalPages - 1}>
+          Next
+        </button>
+      </div>
     </div>
   );
 };

@@ -1,15 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ArticleList from './components/ArticleList';
-import { getTotalNumberOfArticles, getRandomArticle } from './services/articleService';
+import { getTotalNumberOfArticles } from './services/articleService';
 import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [countdown, setCountdown] = useState(0);
   const [totalArticles, setTotalArticles] = useState(0);
-  const [randomArticle, setRandomArticle] = useState(null);
-  const [displayedArticles, setDisplayedArticles] = useState([]); // Dodaj stan dla wyświetlanych artykułów
+  const [displayedArticles, setDisplayedArticles] = useState([]);
 
   const loadTotalArticles = async () => {
     try {
@@ -17,15 +16,6 @@ function App() {
       setTotalArticles(response.data);
     } catch (error) {
       console.error('Error fetching total articles:', error);
-    }
-  };
-
-  const loadRandomArticle = async () => {
-    try {
-      const response = await getRandomArticle();
-      setRandomArticle(response.data);
-    } catch (error) {
-      console.error('Error fetching random article:', error);
     }
   };
 
@@ -57,16 +47,8 @@ function App() {
   return (
     <div className="App">
       <header className="App-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-        <div style={{ display: 'flex', alignItems: 'center' }}>
-          <button className="article-count-button" onClick={loadTotalArticles}>
-            Load Total Articles
-          </button>
-          <div className="article-count" style={{ color: '#ffffff', marginLeft: '20px', marginTop: '-5px' }}>
-            Total Articles: {totalArticles}
-          </div>
-        </div>
         <div className="header-container">
-          <h1 style={{ color: '#ffffff' }}>News Aggregation</h1>
+          <h1 style={{ color: '#ffffff' }}>Pulse News</h1>
         </div>
         <h2 className="header-subtitle">Stay updated with the latest news articles</h2>
         <div className="current-time" style={{ display: 'flex', alignItems: 'center', color: '#ffffff', justifyContent: 'center', marginBottom: '10px' }}>
@@ -79,19 +61,8 @@ function App() {
           ></i>
         </div>
       </header>
-      <ArticleList setDisplayedArticles={setDisplayedArticles} /> {/* Przekazujemy wyświetlane artykuły */}
-      {randomArticle && ( // Enhanced display for random article
-        <div className="random-article">
-          <h3>{randomArticle.title}</h3>
-          <p>{randomArticle.content}</p>
-          {randomArticle.image && (
-            <img src={randomArticle.image} alt={randomArticle.title} style={{ width: '800px', height: 'auto', borderRadius: '8px' }} />
-          )}
-          <a href={randomArticle.link} className="read-more-link" target="_blank" rel="noopener noreferrer">
-            Read more about this article!
-          </a>
-        </div>
-      )}
+      <ArticleList setDisplayedArticles={setDisplayedArticles} />
+
       <footer className="App-footer">
         <p>New articles are updated every hour. Stay tuned!</p>
         <div className="countdown" style={{ color: '#ffffff' }}>

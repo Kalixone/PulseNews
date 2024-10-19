@@ -24,6 +24,7 @@ public class GuardianNewsService implements AggregationService {
     @Value("${guardian.api.key}")
     private String apiKey;
 
+    @Override
     public void fetchArticles() {
         String url = "https://content.guardianapis.com/search?api-key=" + apiKey + "&page-size=100&show-fields=thumbnail";
         GuardianResponse response = restTemplate.getForObject(url, GuardianResponse.class);

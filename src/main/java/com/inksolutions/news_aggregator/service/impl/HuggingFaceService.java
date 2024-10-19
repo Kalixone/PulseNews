@@ -36,16 +36,21 @@ public class HuggingFaceService {
         String requestBody = "{ \"inputs\": \"" + articleTitle + "\" }";
 
         HttpEntity<String> entity = new HttpEntity<>(requestBody, headers);
-        ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
 
-        String jsonResponse = response.getBody();
+        try {
+            ResponseEntity<String> response = restTemplate.postForEntity(url, entity, String.class);
+            if (response.getStatusCode().is2xxSuccessful() && response.getBody() != null) {
+                String jsonResponse = response.getBody();
+                List<String> locations = extractLocationsFromResponse(jsonResponse);
 
-        List<String> locations = extractLocationsFromResponse(jsonResponse);
-
-        for (String location : locations) {
-            if (isLocationInUSCities(location)) {
-                return location;
+                for (String location : locations) {
+                    if (isLocationInUSCities(location)) {
+                        return location;
+                    }
+                }
             }
+        } catch (Exception e) {
+            System.err.println("Error while calling Hugging Face API: " + e.getMessage());
         }
         return null;
     }

@@ -32,12 +32,12 @@ databaseChangeLog:
                     primaryKey: true
               - column:
                   name: title
-                  type: varchar(255)
+                  type: varchar(1024)
                   constraints:
                     nullable: false
               - column:
                   name: image
-                  type: varchar(255)
+                  type: varchar(1024)
                   constraints:
                     nullable: true
               - column:
@@ -52,6 +52,6 @@ databaseChangeLog:
                     nullable: false
               - column:
                   name: link
-                  type: varchar(255)
+                  type: varchar(1024)
                   constraints:
                     nullable: true

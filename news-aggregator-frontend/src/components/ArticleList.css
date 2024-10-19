@@ -1,166 +1,162 @@
 body {
   font-family: 'Arial', sans-serif;
-  background-color: #f7f9fc; /* Tło strony */
+  background-color: #f7f9fc;
   color: #333;
   margin: 0;
   padding: 20px;
 }
 
 .header-container {
-  background-color: #3f51b5; /* Tło nagłówka na niebieskie */
+  background-color: #3f51b5;
   padding: 20px;
   text-align: center;
-  margin-bottom: 20px; /* Odstęp od artykułów */
-  border-radius: 8px; /* Zaokrąglone rogi */
+  margin-bottom: 20px;
+  border-radius: 8px;
 }
 
 h1 {
-  color: #ffffff; /* Kolor białego tekstu tytułu */
-  margin: 0; /* Zresetowanie marginesu */
+  color: #ffffff;
+  margin: 0;
 }
 
 .header-subtitle {
-  color: #ffffff; /* Kolor nagłówka na biały */
-  margin: 10px 0 0; /* Marginesy do nagłówka */
+  color: #ffffff;
+  margin: 10px 0 0;
 }
 
 h2 {
-  color: #6F42C1; /* Delikatny fioletowy kolor dla tytułów artykułów */
-  margin: 0 0 10px; /* Marginesy do tytułów artykułów */
+  color: #6F42C1;
+  margin: 0 0 10px;
 }
 
 .article-list {
-  display: grid; /* Użyj grid layout do układania artykułów */
-  grid-template-columns: repeat(2, 1fr); /* Dwie kolumny */
-  gap: 20px; /* Odstępy między artykułami */
-  list-style-type: none; /* Usunięcie punktów listy */
-  padding: 0; /* Zresetowanie paddingu */
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  list-style-type: none;
+  padding: 0;
 }
 
 .article-item {
-  background-color: #e0f7fa; /* Zmienione tło kafelka na jasny błękitny */
+  background-color: #e0f7fa;
   border: 1px solid #ddd;
   border-radius: 8px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 15px;
-  text-align: center; /* Wyśrodkowanie treści w kafelku */
+  text-align: center;
   transition: transform 0.2s;
 }
 
 .article-item:hover {
   transform: scale(1.02);
-  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Powiększony cień przy najechaniu */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 .publish-date {
-  color: #777; /* Zmieniony kolor dla daty publikacji */
+  color: #777;
   font-style: italic;
 }
 
 img {
   max-width: 100%;
   height: auto;
-  border-radius: 50%; /* Okrągły kształt */
-  object-fit: cover; /* Upewniamy się, że zdjęcie dobrze pasuje do okręgu */
-  width: 300px; /* Zwiększono szerokość miniatury */
-  height: 300px; /* Zwiększono wysokość miniatury */
-  margin-bottom: 15px; /* Zwiększony margines dolny, aby było miejsce pod zdjęciem */
+  border-radius: 50%;
+  object-fit: cover;
+  width: 300px;
+  height: 300px;
+  margin-bottom: 15px;
 }
 
 .read-more-link {
-  display: inline-block; /* Umożliwienie marginesu i paddingu */
-  margin-top: 10px; /* Dodanie marginesu od góry */
-  background-color: rgba(255, 255, 255, 0.7); /* Białe tło z przezroczystością */
-  color: #007bff; /* Kolor linku */
-  padding: 10px; /* Padding dla linku */
-  border-radius: 4px; /* Zaokrąglenie rogów */
-  text-decoration: none; /* Bez podkreślenia */
-  transition: background-color 0.2s; /* Efekt przejścia dla zmiany tła */
+  display: inline-block;
+  margin-top: 10px;
+  background-color: rgba(255, 255, 255, 0.7);
+  color: #007bff;
+  padding: 10px;
+  border-radius: 4px;
+  text-decoration: none;
+  transition: background-color 0.2s;
 }
 
 .read-more-link:hover {
-  text-decoration: underline; /* Podkreślenie przy najechaniu */
-  background-color: rgba(255, 255, 255, 0.9); /* Zmiana tła przy najechaniu */
+  text-decoration: underline;
+  background-color: rgba(255, 255, 255, 0.9);
 }
 
 button {
-  background-color: #007bff; /* Kolor przycisku */
+  background-color: #007bff;
   color: white;
   border: none;
   border-radius: 4px;
   padding: 10px 15px;
   cursor: pointer;
-  margin-top: 20px; /* Margines od góry */
+  margin-top: 20px;
 }
 
 button:hover {
-  background-color: #0056b3; /* Ciemniejszy kolor przy najechaniu */
+  background-color: #0056b3;
 }
 
-/* Nowy styl dla przycisku do pobierania artykułów niezwiązanych z USA */
 .fetch-non-us-articles-button {
-  display: block; /* Wyśrodkowanie przycisku w kontenerze */
-  margin: 20px auto; /* Margines automatyczny od góry i dołu */
-  background-color: #28a745; /* Zielony kolor dla przycisku */
+  display: block;
+  margin: 20px auto;
+  background-color: #28a745;
   color: white;
   border: none;
   border-radius: 4px;
   padding: 10px 15px;
-  text-align: center; /* Wyśrodkowanie tekstu */
-  font-size: 16px; /* Rozmiar czcionki */
+  text-align: center;
+  font-size: 16px;
 }
 
 .fetch-non-us-articles-button:hover {
-  background-color: #218838; /* Ciemniejszy kolor przy najechaniu */
+  background-color: #218838;
 }
 
-/* Nowe style dla kontenera wyszukiwania i przycisków */
 .button-search-container {
   display: flex;
-  justify-content: space-between; /* Ustawia przestrzeń między przyciskami a polami wyszukiwania */
-  align-items: center; /* Wyrównanie elementów w pionie */
-  margin-bottom: 20px; /* Odstęp dolny dla kontenera */
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
 }
 
 .search-container, .date-search-container {
   display: flex;
-  align-items: center; /* Wyrównanie elementów w pionie */
-  margin-left: 10px; /* Odstęp między przyciskami a polem wyszukiwania */
+  align-items: center;
+  margin-left: 10px;
 }
 
 input[type="text"], input[type="date"] {
   padding: 5px;
-  margin-right: 10px; /* Odstęp między polem a przyciskiem */
+  margin-right: 10px;
 }
 
-/* Styl dla kontenera z przyciskami do losowania artykułów i wyszukiwania */
 .random-article-container {
   display: flex;
-  align-items: center; /* Wyrównanie elementów w pionie */
+  align-items: center;
 }
 
 .random-article-button {
-  margin-right: 15px; /* Odstęp między przyciskami */
+  margin-right: 15px;
 }
 
-/* Dostosowanie dla małych ekranów */
 @media (max-width: 600px) {
   .article-list {
-    grid-template-columns: 1fr; /* Na małych ekranach jedna kolumna */
+    grid-template-columns: 1fr;
   }
 
   .button-search-container {
-    flex-direction: column; /* Na małych ekranach ułożenie w kolumnę */
-    align-items: flex-start; /* Wyśrodkowanie w lewym rogu */
+    flex-direction: column;
+    align-items: flex-start;
   }
 
   .search-container, .date-search-container {
-    margin-left: 0; /* Resetowanie marginesu po lewej */
-    margin-top: 10px; /* Dodanie odstępu między polami wyszukiwania */
+    margin-left: 0;
+    margin-top: 10px;
   }
 
   .random-article-container {
-    flex-direction: column; /* Na małych ekranach ułożenie w kolumnę */
-    align-items: flex-start; /* Wyśrodkowanie w lewym rogu */
+    flex-direction: column;
+    align-items: flex-start;
   }
 }

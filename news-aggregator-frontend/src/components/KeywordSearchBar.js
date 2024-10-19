@@ -6,8 +6,8 @@ const KeywordSearchBar = ({ setArticles }) => {
 
   const handleSearch = async () => {
     if (!keyword) {
-      console.log('Proszę podać słowo kluczowe'); // Możesz dodać alert dla lepszej widoczności
-      return; // Upewnij się, że słowo kluczowe nie jest puste
+      console.log('Please enter a keyword');
+      return;
     }
 
     try {
@@ -16,7 +16,7 @@ const KeywordSearchBar = ({ setArticles }) => {
         throw new Error('Failed to fetch articles');
       }
       const articles = await response.json();
-      setArticles(articles); // Upewnij się, że setArticles jest poprawnie przekazywana
+      setArticles(articles);
       console.log(`Szukam artykułów z hasłem: ${keyword}`);
     } catch (error) {
       console.error('Error fetching articles by keyword:', error);
