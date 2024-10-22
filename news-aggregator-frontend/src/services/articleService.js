@@ -1,14 +1,14 @@
 import axios from 'axios';
 
-const API_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/location';
-const API_NOT_CONNECTED_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/not-connected';
-const API_COUNTER_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/counter';
-const API_RANDOM_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/random';
-const API_SEARCH_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/search';
-const API_DATE_URL = 'http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/date';
+const API_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/location';
+const API_NOT_CONNECTED_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/not-connected';
+const API_COUNTER_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/counter';
+const API_RANDOM_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/random';
+const API_SEARCH_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/search';
+const API_DATE_URL = 'https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/date';
 
 export const getAllArticles = async () => {
- return await axios.get('http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles');
+  return await axios.get('https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles');
 };
 
 export const getArticlesByLocation = async (location, page = 0, size = 10) => {

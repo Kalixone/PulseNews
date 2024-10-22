@@ -11,10 +11,10 @@ const KeywordSearchBar = ({ setArticles }) => {
     }
 
     try {
-      const response = await fetch(`http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/search?word=${keyword}`);
-      if (!response.ok) {
-        throw new Error('Failed to fetch articles');
-      }
+        const response = await fetch(`https://dev.dd1ik08ksjdgb.amplifyapp.com/api/articles/search?word=${keyword}`);
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
       const articles = await response.json();
       setArticles(articles);
       console.log(`Szukam artykułów z hasłem: ${keyword}`);
