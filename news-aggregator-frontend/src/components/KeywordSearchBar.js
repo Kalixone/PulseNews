@@ -11,7 +11,7 @@ const KeywordSearchBar = ({ setArticles }) => {
     }
 
     try {
-        const response = await fetch(`http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/search?word=${keyword}`);
+        const response = await fetch(`https://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/search?word=${keyword}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
