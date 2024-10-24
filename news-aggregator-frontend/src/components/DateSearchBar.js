@@ -10,7 +10,7 @@ const DateSearchBar = ({ setArticles }) => {
     }
 
     try {
-        const response = await fetch(`https://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/date?date=${date}`);
+        const response = await fetch(`http://pulsenewsapp-env.eba-trzjtpw7.us-east-1.elasticbeanstalk.com/api/articles/date?date=${date}`);
         if (!response.ok) {
             throw new Error('Network response was not ok');
         }
