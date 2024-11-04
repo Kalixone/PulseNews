@@ -1,5 +1,6 @@
 package com.inksolutions.news_aggregator.service;
 
+import com.inksolutions.news_aggregator.dto.ArticleDTO;
 import com.inksolutions.news_aggregator.model.Article;
 import com.inksolutions.news_aggregator.repository.ArticleRepository;
 import com.inksolutions.news_aggregator.service.impl.ArticleServiceImpl;
@@ -43,14 +44,15 @@ public class ArticleServiceTest {
     @DisplayName("Get articles from specified location")
     public void getFromLocation_ValidLocation_ReturnsArticlesPage() {
         Article article = createArticle();
+        ArticleDTO articleDTO = ArticleDTO.fromEntity(article);
         Pageable pageable = PageRequest.of(0, 10);
 
         when(articleRepository.findByLocation(pageable, LOCATION))
                 .thenReturn(new PageImpl<>(List.of(article), pageable, 1));
 
-        Page<Article> searchedLocations = articleService.getFromLocation(pageable, LOCATION);
+        Page<ArticleDTO> searchedLocations = articleService.getFromLocation(pageable, LOCATION);
 
-        assertThat(searchedLocations).containsExactly(article);
+        assertThat(searchedLocations).containsExactly(articleDTO);
         assertThat(searchedLocations.getTotalElements()).isEqualTo(1);
         verify(articleRepository).findByLocation(pageable, LOCATION);
         verifyNoMoreInteractions(articleRepository);
@@ -61,14 +63,15 @@ public class ArticleServiceTest {
     public void notConnectedToUS_CityNotConnected_ReturnsArticlesNotConnected() {
         Article article = createArticle();
         article.setLocation(CITY_NOT_CONNECTED_TO_US);
+        ArticleDTO articleDTO = ArticleDTO.fromEntity(article);
         Pageable pageable = PageRequest.of(0, 10);
 
         when(articleRepository.notConnectedToUS(pageable))
                 .thenReturn(new PageImpl<>(List.of(article), pageable, 1));
 
-        Page<Article> articles = articleService.notConnectedToUS(pageable);
+        Page<ArticleDTO> articles = articleService.notConnectedToUS(pageable);
 
-        assertThat(articles.getContent()).containsExactly(article);
+        assertThat(articles.getContent()).containsExactly(articleDTO);
         assertThat(articles.getTotalElements()).isEqualTo(1);
         verify(articleRepository).notConnectedToUS(pageable);
         verifyNoMoreInteractions(articleRepository);
@@ -78,13 +81,14 @@ public class ArticleServiceTest {
     @DisplayName("Retrieve article by valid ID")
     public void findById_ValidId_ReturnsExistingArticle() {
         Article article = createArticle();
+        ArticleDTO articleDTO = ArticleDTO.fromEntity(article);
 
         when(articleRepository.findById(ARTICLE_ID)).thenReturn(Optional.of(article));
 
-        Optional<Article> articleById = articleService.findById(ARTICLE_ID);
+        Optional<ArticleDTO> articleById = articleService.findById(ARTICLE_ID);
 
         assertThat(articleById).isPresent();
-        assertThat(articleById.get()).isEqualTo(article);
+        assertThat(articleById.get()).isEqualTo(articleDTO);
         verify(articleRepository).findById(ARTICLE_ID);
         verifyNoMoreInteractions(articleRepository);
     }
@@ -93,14 +97,15 @@ public class ArticleServiceTest {
     @DisplayName("Search articles by keyword")
     public void searcher_ValidKeyword_ReturnsMatchingArticles() {
         Article article = createArticle();
+        ArticleDTO articleDTO = ArticleDTO.fromEntity(article);
         String searchKeyword = "Random";
 
         when(articleRepository.findByTitleContainingIgnoreCase(searchKeyword))
                 .thenReturn(List.of(article));
 
-        List<Article> searchedArticles = articleService.searcher(searchKeyword);
+        List<ArticleDTO> searchedArticles = articleService.searcher(searchKeyword);
 
-        assertThat(searchedArticles).containsExactly(article);
+        assertThat(searchedArticles).containsExactly(articleDTO);
         verify(articleRepository).findByTitleContainingIgnoreCase(searchKeyword);
         verifyNoMoreInteractions(articleRepository);
     }
@@ -109,6 +114,7 @@ public class ArticleServiceTest {
     @DisplayName("Find articles published on specific date")
     public void findByPublishDate_ValidDate_ReturnsArticlesWithinDateRange() {
         Article article = createArticle();
+        ArticleDTO articleDTO = ArticleDTO.fromEntity(article);
 
         OffsetDateTime publishDate = OffsetDateTime.of(2024, 10, 15, 10, 0, 0, 0, ZoneOffset.UTC);
         OffsetDateTime startOfDay = publishDate.toLocalDate()
@@ -120,9 +126,9 @@ public class ArticleServiceTest {
         when(articleRepository.findByPublishDateBetween(startOfDay, endOfDay))
                 .thenReturn(List.of(article));
 
-        List<Article> articles = articleService.findByPublishDate(publishDate);
+        List<ArticleDTO> articles = articleService.findByPublishDate(publishDate);
 
-        assertThat(articles).containsExactly(article);
+        assertThat(articles).containsExactly(articleDTO);
         verify(articleRepository).findByPublishDateBetween(startOfDay, endOfDay);
         verifyNoMoreInteractions(articleRepository);
     }

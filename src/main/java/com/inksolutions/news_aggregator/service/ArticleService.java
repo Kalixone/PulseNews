@@ -1,5 +1,6 @@
 package com.inksolutions.news_aggregator.service;
 
+import com.inksolutions.news_aggregator.dto.ArticleDTO;
 import com.inksolutions.news_aggregator.model.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -10,19 +11,15 @@ import java.util.Optional;
 
 @Service
 public interface ArticleService {
-    Page<Article> getFromLocation(Pageable pageable, String location);
+    Page<ArticleDTO> getFromLocation(Pageable pageable, String location);
 
-    List<Article> findAll();
+    List<ArticleDTO> findAll();
 
-    Page<Article> notConnectedToUS(Pageable pageable);
+    Page<ArticleDTO> notConnectedToUS(Pageable pageable);
 
-    long count();
+    Optional<ArticleDTO> findById(Long id);
 
-    Optional<Article> getRandom();
+    List<ArticleDTO> searcher(String word);
 
-    Optional<Article> findById(Long id);
-
-    List<Article> searcher(String word);
-
-    List<Article> findByPublishDate(OffsetDateTime startOfDay);
+    List<ArticleDTO> findByPublishDate(OffsetDateTime startOfDay);
 }
