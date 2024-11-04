@@ -33,16 +33,15 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+      <header className="App-header">
         <div className="header-container">
-          <h1 style={{ color: '#ffffff' }}>Pulse News</h1>
+          <h1>Pulse News</h1>
         </div>
         <h2 className="header-subtitle">Stay updated with the latest news articles</h2>
-        <div className="current-time" style={{ display: 'flex', alignItems: 'center', color: '#ffffff', justifyContent: 'center', marginBottom: '10px' }}>
+        <div className="current-time">
           <span>{currentTime.toLocaleTimeString()}</span>
           <i
             className="fa fa-envelope"
-            style={{ color: '#ffffff', fontSize: '30px', marginLeft: '20px', cursor: 'pointer' }}
             onClick={handleMailClick}
             title="Send Email"
           ></i>
@@ -52,7 +51,7 @@ function App() {
 
       <footer className="App-footer">
         <p>New articles are updated every hour. Stay tuned!</p>
-        <div className="countdown" style={{ color: '#ffffff' }}>
+        <div className="countdown">
           Next articles fetch in: {formatTime(countdown)}
         </div>
       </footer>
