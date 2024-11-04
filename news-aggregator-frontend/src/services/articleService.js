@@ -16,14 +16,6 @@ export const getArticlesNotConnectedToUS = async (page = 0, size = 10) => {
   return await axios.get(finalURL);
 };
 
-export const getTotalNumberOfArticles = async () => {
-  return await axios.get(`${API_BASE_URL}/counter`);
-};
-
-export const getRandomArticle = async () => {
-  return await axios.get(`${API_BASE_URL}/random`);
-};
-
 export const searchArticlesByWord = async (word) => {
   const finalURL = `${API_BASE_URL}/search?word=${word}`;
   return await axios.get(finalURL);

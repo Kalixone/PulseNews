@@ -1,7 +1,6 @@
 package com.inksolutions.news_aggregator.service.impl;
 
 import com.inksolutions.news_aggregator.dto.ArticleDTO;
-import com.inksolutions.news_aggregator.model.Article;
 import com.inksolutions.news_aggregator.repository.ArticleRepository;
 import com.inksolutions.news_aggregator.service.ArticleService;
 import lombok.RequiredArgsConstructor;

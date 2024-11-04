@@ -1,7 +1,6 @@
 package com.inksolutions.news_aggregator.controller;
 
 import com.inksolutions.news_aggregator.dto.ArticleDTO;
-import com.inksolutions.news_aggregator.model.Article;
 import com.inksolutions.news_aggregator.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;

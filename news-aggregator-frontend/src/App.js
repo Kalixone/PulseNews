@@ -46,15 +46,16 @@ function App() {
 
   return (
     <div className="App">
-      <header className="App-header">
+      <header className="App-header" style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
         <div className="header-container">
-          <h1>Pulse News</h1>
+          <h1 style={{ color: '#ffffff' }}>Pulse News</h1>
         </div>
         <h2 className="header-subtitle">Stay updated with the latest news articles</h2>
-        <div className="current-time">
+        <div className="current-time" style={{ display: 'flex', alignItems: 'center', color: '#ffffff', justifyContent: 'center', marginBottom: '10px' }}>
           <span>{currentTime.toLocaleTimeString()}</span>
           <i
             className="fa fa-envelope"
+            style={{ color: '#ffffff', fontSize: '30px', marginLeft: '20px', cursor: 'pointer' }}
             onClick={handleMailClick}
             title="Send Email"
           ></i>
