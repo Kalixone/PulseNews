@@ -25,7 +25,7 @@ public class NewsService implements AggregationService {
 
     @Override
     public void fetchArticles() {
-        String url = "https://newsapi.org/v2/top-headlines?country=us&pageSize=5&page=1&apiKey=" + apiKey;
+        String url = "https://newsapi.org/v2/top-headlines?country=us&pageSize=10&page=1&apiKey=" + apiKey;
         NewsResponse response = restTemplate.getForObject(url, NewsResponse.class);
 
         if (response != null && response.getArticles() != null) {
