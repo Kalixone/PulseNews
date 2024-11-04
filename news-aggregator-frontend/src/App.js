@@ -1,27 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import ArticleList from './components/ArticleList';
-import { getTotalNumberOfArticles } from './services/articleService';
 import 'font-awesome/css/font-awesome.min.css';
 
 function App() {
   const [currentTime, setCurrentTime] = useState(new Date());
   const [countdown, setCountdown] = useState(0);
-  const [totalArticles, setTotalArticles] = useState(0);
   const [displayedArticles, setDisplayedArticles] = useState([]);
 
-  const loadTotalArticles = async () => {
-    try {
-      const response = await getTotalNumberOfArticles();
-      setTotalArticles(response.data);
-    } catch (error) {
-      console.error('Error fetching total articles:', error);
-    }
-  };
-
   useEffect(() => {
-    loadTotalArticles();
-
     const intervalId = setInterval(() => {
       setCurrentTime(new Date());
       const now = new Date();

@@ -1,7 +1,6 @@
 package com.inksolutions.news_aggregator.service;
 
 import com.inksolutions.news_aggregator.dto.ArticleDTO;
-import com.inksolutions.news_aggregator.model.Article;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
