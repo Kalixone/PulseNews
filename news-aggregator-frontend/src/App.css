@@ -85,13 +85,20 @@
 }
 
 .current-time {
+  display: flex;
+  align-items: center;
+  color: #ffffff;
+  justify-content: center;
+  margin-bottom: 10px;
   font-size: 18px;
   font-weight: bold;
-  position: absolute;
-  right: 20px;
-  top: 20px;
-  color: white;
-  z-index: 10;
+}
+
+.current-time i {
+  color: #ffffff;
+  font-size: 30px;
+  margin-left: 20px;
+  cursor: pointer;
 }
 
 .App-footer {

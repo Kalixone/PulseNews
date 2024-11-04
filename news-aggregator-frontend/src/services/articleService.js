@@ -1,39 +1,35 @@
 import axios from 'axios';
 
-const API_URL = 'https://pulsenews-5.onrender.com/api/articles/location';
-const API_NOT_CONNECTED_URL = 'https://pulsenews-5.onrender.com/api/articles/not-connected';
-const API_COUNTER_URL = 'https://pulsenews-5.onrender.com/api/articles/counter';
-const API_RANDOM_URL = 'https://pulsenews-5.onrender.com/api/articles/random';
-const API_SEARCH_URL = 'https://pulsenews-5.onrender.com/api/articles/search';
-const API_DATE_URL = 'https://pulsenews-5.onrender.com/api/articles/date';
+const API_BASE_URL = 'https://pulsenews-5.onrender.com/api/articles';
 
 export const getAllArticles = async () => {
-  return await axios.get('https://pulsenews-5.onrender.com/api/articles');
+  return await axios.get(`${API_BASE_URL}`);
 };
 
 export const getArticlesByLocation = async (location, page = 0, size = 10) => {
-  const finalURL = `${API_URL}?location=${location}&page=${page}&size=${size}`;
+  const finalURL = `${API_BASE_URL}/location?location=${location}&page=${page}&size=${size}`;
   return await axios.get(finalURL);
 };
 
 export const getArticlesNotConnectedToUS = async (page = 0, size = 10) => {
-  return await axios.get(`${API_NOT_CONNECTED_URL}?page=${page}&size=${size}`);
+  const finalURL = `${API_BASE_URL}/not-connected?page=${page}&size=${size}`;
+  return await axios.get(finalURL);
 };
 
 export const getTotalNumberOfArticles = async () => {
-  return await axios.get(API_COUNTER_URL);
+  return await axios.get(`${API_BASE_URL}/counter`);
 };
 
 export const getRandomArticle = async () => {
-  return await axios.get(API_RANDOM_URL);
+  return await axios.get(`${API_BASE_URL}/random`);
 };
 
 export const searchArticlesByWord = async (word) => {
-  const finalURL = `${API_SEARCH_URL}?word=${word}`;
+  const finalURL = `${API_BASE_URL}/search?word=${word}`;
   return await axios.get(finalURL);
 };
 
 export const findArticlesByDate = async (date, page = 0, size = 10) => {
-  const finalURL = `${API_DATE_URL}?date=${date}&page=${page}&size=${size}`;
+  const finalURL = `${API_BASE_URL}/date?date=${date}&page=${page}&size=${size}`;
   return await axios.get(finalURL);
 };
