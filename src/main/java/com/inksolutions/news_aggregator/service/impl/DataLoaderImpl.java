@@ -32,7 +32,7 @@ public class DataLoaderImpl implements DataLoaderService, CommandLineRunner {
             return;
         }
 
-        ExecutorService executorService = Executors.newFixedThreadPool(20);
+        ExecutorService executorService = Executors.newFixedThreadPool(13);
         try (CSVReader csvReader = new CSVReader(new InputStreamReader(getClass().getResourceAsStream("/cities.csv")))) {
             String[] record;
             while ((record = csvReader.readNext()) != null) {
