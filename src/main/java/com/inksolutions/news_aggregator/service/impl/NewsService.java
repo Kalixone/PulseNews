@@ -29,8 +29,8 @@ public class NewsService implements AggregationService {
         NewsResponse response = restTemplate.getForObject(url, NewsResponse.class);
 
         if (response != null && response.getArticles() != null) {
-            List<NewsArticle> guardianArticles = response.getArticles();
-            List<Article> articles = guardianArticles.stream().map(result -> {
+            List<NewsArticle> newsArticles = response.getArticles();
+            List<Article> articles = newsArticles.stream().map(result -> {
 
                 Article article = new Article();
 
